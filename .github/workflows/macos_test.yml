@@ -1,0 +1,28 @@
+name: macOS Test
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Install dependencies
+      run: |
+        brew install nasm
+        brew install gcc
+    
+    - name: Make build script executable
+      run: |
+        chmod +x mini_compiler/build.sh
+    
+    - name: Build and run mini_compiler
+      run: |
+        cd mini_compiler
+        ./build.sh

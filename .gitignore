@@ -1,0 +1,16 @@
+# Compiled Object files
+*.o
+*.obj
+
+# Compiled executables
+*.exe
+*.out
+*.app
+mini_compiler
+
+# Build outputs
+output.asm
+
+# macOS specific
+.DS_Store
+__MACOSX/
