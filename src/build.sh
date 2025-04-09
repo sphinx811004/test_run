@@ -31,8 +31,19 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Assembling the generated code..."
-# Use detected format
-nasm -f $ASM_FORMAT output.asm -o output.o
+# Use the appropriate assembler based on architecture
+if [ "$ARCH" = "arm64" ] || [ "$ARCH" = "aarch64" ]; then
+    # For ARM64, use the built-in assembler (as)
+    echo "Using ARM64 assembler..."
+    # Create a temporary file with ARM-only assembly
+    grep -v "%macro" output.asm | grep -v "%endmacro" > arm_output.asm
+    as -arch arm64 arm_output.asm -o output.o
+else
+    # For x86, use NASM
+    echo "Using NASM for x86..."
+    nasm -f $ASM_FORMAT output.asm -o output.o
+fi
+
 if [ $? -ne 0 ]; then
     echo "Error assembling code"
     exit 1
