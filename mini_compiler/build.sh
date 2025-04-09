@@ -16,14 +16,15 @@ else
 fi
 
 echo "Compiling the C++ compiler..."
-g++ -std=c++17 -Wall -Wextra $ARCH_DEFINE -o mini_compiler code.cpp
+# Use 'compiler_exe' instead of 'mini_compiler' to avoid directory name conflict
+g++ -std=c++17 -Wall -Wextra $ARCH_DEFINE -o compiler_exe code.cpp
 if [ $? -ne 0 ]; then
     echo "Error compiling C++ code"
     exit 1
 fi
 
 echo "Running the compiler to generate assembly..."
-./mini_compiler
+./compiler_exe
 if [ $? -ne 0 ]; then
     echo "Error generating assembly"
     exit 1
