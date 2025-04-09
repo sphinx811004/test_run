@@ -6,7 +6,8 @@
 *.exe
 *.out
 *.app
-mini_compiler
+/mini_compiler/mini_compiler
+/mini_compiler/mini_compiler.exe
 
 # Build outputs
 output.asm
